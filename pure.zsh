@@ -227,7 +227,7 @@ prompt_pure_precmd() {
 		export VIRTUAL_ENV_DISABLE_PROMPT=12
 	fi
 
-	# Nix package manager integration. If used from within 'nix shell' - shell name is shown like so:
+	# Nix package manager integration. If used from within 'nix-shell' - shell name is shown like so:
 	# ~/Projects/flake-utils-plus master
 	# flake-utils-plus ❯
 	if zstyle -T ":prompt:pure:environment:nix-shell" show; then
@@ -236,11 +236,17 @@ prompt_pure_precmd() {
 		fi
 	fi
 
-	# Hack to display nix shell indicator when invoked by the new "nix shell" command.
+	# Hack to display nix shell indicator when invoked by the new 'nix shell' command.
   if zstyle -T ":prompt:pure:environment:nix-shell" show; then
-    if [[ $PATH =~ '/nix/store' && $SHLVL -gt 1 ]]; then
-			psvar[12]="${name:-nix-shell}"
-		fi
+    if "$ZED_TERM"; then
+      if [[ $PATH =~ '/nix/store' && $SHLVL > 2 ]]; then
+  	    psvar[12]="nix-shell"
+  		fi
+  	else
+  	  if [[ $PATH =~ '/nix/store' ]]; then
+  	    psvar[12]="nix-shell"
+  	  fi
+  	fi
 	fi
 
 	# Make sure VIM prompt is reset.
