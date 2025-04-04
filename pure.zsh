@@ -238,15 +238,15 @@ prompt_pure_precmd() {
 
 	# Hack to display nix shell indicator when invoked by the new 'nix shell' command.
   if zstyle -T ":prompt:pure:environment:nix-shell" show; then
-    if "$ZED_TERM"; then
-      if [[ $PATH =~ '/nix/store' && $SHLVL > 2 ]]; then
-  	    psvar[12]="nix-shell"
-  		fi
-  	else
-  	  if [[ $PATH =~ '/nix/store' ]]; then
-  	    psvar[12]="nix-shell"
-  	  fi
-  	fi
+    if [[ $PATH =~ '/nix/store' ]]; then
+      if [[ $TERM_PROGRAM == 'zed' ]]; then
+        if [[ $SHLVL -gt 2 ]]; then
+			    psvar[12]="nix-shell"
+			  fi
+			else
+			  psvar[12]="nix-shell"
+			fi
+		fi
 	fi
 
 	# Make sure VIM prompt is reset.
