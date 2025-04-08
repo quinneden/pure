@@ -241,10 +241,10 @@ prompt_pure_precmd() {
     if [[ $PATH =~ '/nix/store' ]]; then
       if [[ $TERM_PROGRAM == 'zed' ]]; then
         if [[ $SHLVL -gt 2 ]]; then
-			    psvar[12]="nix-shell"
+			    psvar[12]="${name:-nix-shell}"
 			  fi
 			else
-			  psvar[12]="nix-shell"
+			  psvar[12]="${name:-nix-shell}"
 			fi
 		fi
 	fi
