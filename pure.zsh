@@ -245,7 +245,6 @@ prompt_pure_precmd() {
 			  fi
 			elif [[ -f /etc/NIXOS && $SHLVL -gt 1 ]]; then
 			  	psvar[12]="${name:-nix-shell}"
-				fi
 			else
 				psvar[12]="${name:-nix-shell}"
 			fi
