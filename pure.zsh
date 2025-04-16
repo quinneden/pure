@@ -244,8 +244,7 @@ prompt_pure_precmd() {
 			    psvar[12]="${name:-nix-shell}"
 			  fi
 			elif [[ -f /etc/NIXOS ]]; then
-			  (IFS=':' read -rA path_arr <<< "$PATH")
-				if [[ $SHLVL -gt 1 ]] && [[ ${path_arr[1]} =~ '/nix/store' ]]; then
+				if [[ $SHLVL -gt 1 ]] && [[ $(cut -d':' -f1 <<< "$PATH") =~ '/nix/store' ]]; then
 					psvar[12]="${name:-nix-shell}"
 				fi
 			else
