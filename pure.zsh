@@ -240,7 +240,7 @@ prompt_pure_precmd() {
   if zstyle -T ":prompt:pure:environment:nix-shell" show; then
     if [[ $PATH =~ '/nix/store' ]]; then
       if [[ $TERM_PROGRAM == 'zed' ]]; then
-        if [[ $SHLVL -gt 2 ]]; then
+        if [[ $SHLVL -gt 2 ]] && [[ $(cut -d':' -f1 <<< "$PATH") =~ '/nix/store' ]]; then
 			    psvar[12]="${name:-nix-shell}"
 			  fi
 			elif [[ -f /etc/NIXOS ]]; then
